@@ -1,0 +1,5 @@
+ptables -t nat -A POSTROUTING -o enp4s2 -j MASQUERADE
+iptables -A FORWARD -i eth0 -o enp4s2:1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i enp4s2 -o enp4s2:1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i enp4s2:1 -o enp4s2 -j ACCEPT
+iptables-save >> /home/joro/iptables
